@@ -25,6 +25,7 @@ let emailList =[];
 const list = document.querySelector('ul');
 const btn = document.querySelector('.btn');
 const message = document.getElementById('message')
+const loader = document.querySelector('.loader')
 
 // - 2 -
 
@@ -44,21 +45,7 @@ function getEmails(){
   //creiamo la funzione per eseguire la chiamata all'API 10 volte
 
   for( let i = 0; i < maxEmails; i++){
-/*   if (emailList.length < maxEmails){
-      axios.get(endpoint)
-      .then(res => {
-        emailList.push(res.data.response)})
-      .catch(e =>{
-        printError(e.message)})
-    } else{
-      printList()
-    }
-  }
-
-
-}
-*/
-
+  loader.classList.remove('d-none')
   axios.get(endpoint)
   .then(res => {
     emailList.push(res.data.response)
@@ -66,7 +53,6 @@ function getEmails(){
 
   if (emailList.length === maxEmails) {
     printList()
-    console.log('ciao')
   }
   })
 
@@ -83,6 +69,7 @@ function getEmails(){
 function printList(){
   list.classList.remove('d-none')
   emailList.forEach(el => list.innerHTML += `<li class="list-group-item">${el}</li>`)
+  loader.classList.add('d-none')
 }
 
 function printError(errorMsg){
@@ -93,4 +80,5 @@ message.classList.add ('text-danger')
 
 function reset(){
   list.classList.add('d-none');
+  loader.classList.add('d-none')
 }
