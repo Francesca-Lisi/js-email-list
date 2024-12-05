@@ -62,8 +62,14 @@ function getEmails(){
   axios.get(endpoint)
   .then(res => {
     emailList.push(res.data.response)
-  if (emailList.lenght === maxEmails) printList()
+    console.log(emailList.length, maxEmails, emailList)
+
+  if (emailList.length === maxEmails) {
+    printList()
+    console.log('ciao')
+  }
   })
+
   .catch(e => {
     printError(e.message)})
   }
@@ -75,7 +81,7 @@ function getEmails(){
 // - 3 -
 
 function printList(){
-  //list.classList.remove('d-none')
+  list.classList.remove('d-none')
   emailList.forEach(el => list.innerHTML += `<li class="list-group-item">${el}</li>`)
 }
 
@@ -86,5 +92,5 @@ message.classList.add ('text-danger')
 
 
 function reset(){
- // list.classList.add('d-none');
+  list.classList.add('d-none');
 }
